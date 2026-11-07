@@ -1,0 +1,4 @@
+uptime-kuma-api2==2.9.0
+PyYAML==6.0.3
+python-dotenv==1.2.1
+tzdata==2026.6

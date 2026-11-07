@@ -1,0 +1,8 @@
+# Start with one HTTP monitor. No Discord webhook is required for this example.
+version: 1
+namespace: getting-started
+monitors:
+  website:
+    type: http
+    url: https://example.com
+    interval: 60

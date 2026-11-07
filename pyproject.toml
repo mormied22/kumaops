@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77,<83"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kumaops"
+version = "0.1.0rc1"
+description = "Conservative YAML provisioning for Uptime Kuma v2"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["uptime-kuma-api2==2.9.0", "PyYAML==6.0.3", "python-dotenv==1.2.1", "tzdata==2026.6"]
+
+[project.urls]
+Homepage = "https://github.com/mormied22/kumaops"
+Repository = "https://github.com/mormied22/kumaops"
+Issues = "https://github.com/mormied22/kumaops/issues"
+
+[project.scripts]
+kumaops = "kumaops.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

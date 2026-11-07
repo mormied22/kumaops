@@ -1,0 +1,28 @@
+version: 1
+namespace: demo
+notifications:
+  discord:
+    webhook_env: DISCORD_WEBHOOK_URL
+    prefix: "[Monitoring] Service status changed."
+groups:
+  services: {}
+monitors:
+  website:
+    type: http
+    url: https://example.com
+    group: services
+    interval: 60
+    notifications: [discord]
+  resolver:
+    type: ping
+    hostname: router.example.com
+    notifications: [discord]
+maintenance:
+  weekly:
+    timezone: Europe/London
+    weekdays: [0] # Sunday=0, Monday=1, ... Saturday=6
+    start_date: "2026-01-01"
+    start: "03:00"
+    end: "03:30" # Same-day only; split overnight windows.
+    active: false # Enable explicitly after verifying in a disposable instance.
+    monitors: [website, resolver]
