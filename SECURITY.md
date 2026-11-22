@@ -6,9 +6,9 @@ the tested platform and integration scope.
 
 ## Reporting
 
-If private vulnerability reporting is available on the repository's Security tab,
-use it for exploitable security issues. If it is unavailable, request a private
-reporting channel without publishing exploit details or secrets. Do not attach
+Private vulnerability reporting is enabled. Use GitHub's
+[private reporting form](https://github.com/mormied22/kumaops/security/advisories/new)
+for exploitable security issues; do not disclose them in public issues. Do not attach
 passwords, one-time codes, webhooks, environment files, databases or raw private logs.
 
 For ordinary bugs, use a sanitized public issue with the affected version and a

@@ -9,7 +9,8 @@ milestones are driven by demonstrated use cases and test evidence, not dates.
 - Redacted JSON and CI drift exit codes.
 - Detailed conflict reporting and explicit monitor timing/HTTP controls.
 - Verified TLS with custom trust bundles, local apply exclusion and reproducible tests.
-- Remaining qualification: real Discord acceptance/channel confirmation and hosted CI results.
+- Remaining integration qualification: real Discord acceptance/channel confirmation.
+- Hosted CI passed for the merged 0.2.0 commit; see the validation record.
 
 ## 0.3 — ownership-aware reconciliation
 

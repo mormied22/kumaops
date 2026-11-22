@@ -24,7 +24,7 @@ The upstream checkout was pinned to commit
 | Source distribution and universal Python wheel build | Passed |
 | Source archive content/privacy scan | Passed |
 | Actual Discord API acceptance and visible test-channel messages | **Not run: dedicated webhook still required** |
-| GitHub Actions matrix | Configured; not run on GitHub |
+| GitHub Actions matrix | Passed on main, 22 November 2026; six platform/Python jobs plus Kuma integration |
 
 Tests run against an isolated server with a generated disposable account,
 loopback endpoints, reserved example domains and a nonfunctional webhook placeholder.
@@ -43,13 +43,13 @@ scheduler behavior. A UK 03:00-03:30 schedule avoids the clock-change hour.
 See [VERIFICATION.md](VERIFICATION.md) for the remaining release gate. The live
 maintenance test activates/pauses a window; natural boundary timers and DST are
 exercised in the separate upstream model process. These results do not claim
-full-server time travel, real Discord delivery, a passing GitHub CI run or
-compatibility with untested Kuma versions/platforms.
+full-server time travel, real Discord delivery or compatibility with untested
+Kuma versions/platforms.
 
 The 0.2.0 release adds setup, JSON/check workflows, apply exclusion,
 trust/timeout controls and validated monitor settings. The offline suite covers
 those features; the live suite exercises the current CLI and new monitor fields.
-Hosted CI has not been run from this local checkout. The real Discord test remains
+[Hosted CI passed on the merged commit](https://github.com/mormied22/kumaops/actions/runs/45036279592). The real Discord test remains
 skipped because no dedicated webhook was supplied.
 
 The real-server alert fixture explicitly sets maxretries to zero and retryInterval
