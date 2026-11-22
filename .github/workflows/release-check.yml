@@ -16,7 +16,7 @@ jobs:
       - run: python -m ruff check .
       - run: python -m build --no-isolation
       - run: python tools/package_release.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: kumaops-release
           path: dist/*
