@@ -9,7 +9,7 @@ description = "Conservative YAML provisioning for Uptime Kuma v2"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
-dependencies = ["uptime-kuma-api2==2.9.0", "PyYAML==6.0.3", "python-dotenv==1.2.1", "tzdata==2026.6"]
+dependencies = ["uptime-kuma-api2==2.10.1", "PyYAML==6.0.3", "python-dotenv==1.2.1", "tzdata==2026.6"]
 
 [project.urls]
 Homepage = "https://github.com/mormied22/kumaops"
