@@ -19,7 +19,7 @@ This release is deliberately additive:
 
 Matching is not proof of ownership. Reserve your namespace exclusively for this
 tool and review collisions. Changed URLs, webhooks, intervals or schedules produce
-an error rather than automatic updates. For v0.1, reconcile changes manually in
+an error rather than automatic updates. For this release, reconcile changes manually in
 Kuma and your config, or use a deliberate new key after reviewing duplicates.
 No rollback or transaction is offered; earlier successful actions remain after
 a later failure. Keep a Kuma backup before applying.
@@ -33,3 +33,11 @@ The displayed plan includes resource keys only, never payloads, URLs or secrets.
 Exit codes: `0` success (including a plan with pending actions), `2` invalid
 configuration, rejected login or safety refusal, `1` connection/unexpected failure.
 
+
+`--check` returns `3` for pending additions or configured conflicts. `--plan` reports
+all known conflicting resources with field names; `--apply` blocks them before
+writing. Values remain redacted. See [CLI.md](CLI.md) for the JSON and exit-code contract.
+
+Local applies sharing a config directory, target URL and namespace exclude each
+other through `.kumaops/locks/`. This does not coordinate different hosts, directories,
+URL aliases or other tools. Stale locks require manual process inspection before removal.

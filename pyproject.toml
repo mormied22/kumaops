@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kumaops"
-version = "0.1.0rc1"
+version = "0.2.0"
 description = "Conservative YAML provisioning for Uptime Kuma v2"
 readme = "README.md"
 requires-python = ">=3.11"

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.0 — 2026-11-21
+
+- Offline starter-project generation without overwriting files.
+- Read-only CI drift checks with exit code 3 and field-level conflict reporting.
+- Versioned redacted JSON output and explicit non-interactive mode.
+- API timeout and custom CA bundle controls; TLS checks remain enabled.
+- Monitor retries, retry intervals, HTTP timeouts, GET/HEAD, accepted status codes
+  and certificate-expiry notifications.
+- Local apply exclusion per configuration directory, target and namespace.
+- Strict malformed-field/endpoint validation and YAML alias rejection.
+- Restored environment templates, ignore rules and CI workflows missing from the public upload.
+- Community contribution templates, security policy, roadmap and release artifact workflow.
+
+Existing resource updates/deletion remain blocked. Real Discord-channel verification
+and hosted CI results remain pending; see the validation record.
+
 ## 0.1.0-rc.1 — 2026-11-07
 
 First public release candidate.

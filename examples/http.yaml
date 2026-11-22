@@ -1,0 +1,13 @@
+version: 1
+namespace: web-services
+monitors:
+  homepage:
+    type: http
+    url: https://example.com
+    interval: 60
+    maxretries: 2
+    retryInterval: 20
+    timeout: 10
+    method: HEAD
+    accepted_statuscodes: ["200-299", "301", "302"]
+    expiryNotification: true

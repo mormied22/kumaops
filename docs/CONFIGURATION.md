@@ -67,3 +67,18 @@ configuration.
 - [minimal.yaml](../examples/minimal.yaml): one HTTP monitor, no webhook required.
 - [config.yaml](../examples/config.yaml): groups, HTTP/ping checks, Discord and
   inactive weekly maintenance. Replace example endpoints and provide your own webhook.
+
+## Monitor options added in 0.2
+
+| Field | Types | Constraints |
+| --- | --- | --- |
+| `maxretries` | All leaf monitors | Integer 0–100; omitted uses client default |
+| `retryInterval` | All leaf monitors | Integer 20–86400 seconds |
+| `timeout` | HTTP | Integer 1–3600 seconds, no greater than interval |
+| `method` | HTTP | GET or HEAD |
+| `accepted_statuscodes` | HTTP | Quoted individual 100–599 codes or complete class ranges such as 200-299 |
+| `expiryNotification` | HTTP | Boolean certificate-expiry notification setting |
+
+These fields use the pinned client's field names. Timing defaults remain unchanged
+when omitted. Other server fields are unmanaged. YAML anchors/aliases are rejected.
+See [the HTTP example](../examples/http.yaml) and [CLI reference](CLI.md).

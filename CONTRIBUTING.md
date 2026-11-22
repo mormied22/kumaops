@@ -38,3 +38,10 @@ State the exact upstream versions used for any compatibility claim.
 
 Contributions are provided under the repository's MIT license. Third-party code
 must retain its attribution and use a compatible license.
+
+## Feature acceptance
+
+Open a workflow-focused issue before large changes. Describe intended configuration,
+compatibility impact and recovery behavior. Updates/deletion need an ownership-aware
+design, not a broad overwrite switch. See [ROADMAP.md](ROADMAP.md) and
+[ARCHITECTURE.md](docs/ARCHITECTURE.md). Secret disclosures follow [SECURITY.md](SECURITY.md).
