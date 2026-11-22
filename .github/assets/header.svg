@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title description">
+<title id="title">KumaOps</title><desc id="description">Review. Apply. Stay in sync. Configuration as code for Uptime Kuma.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#19303e" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="300" rx="20" fill="#0b1621"/><rect width="1200" height="300" rx="20" fill="url(#grid)"/>
+<path d="M0 299H1200" stroke="#39dfb0" stroke-width="3"/>
+<g transform="translate(48 82)"><rect width="100" height="108" rx="22" fill="#122d37" stroke="#2c5a64"/>
+<rect x="20" y="25" width="60" height="12" rx="6" fill="#39dfb0"/><rect x="20" y="49" width="41" height="12" rx="6" fill="#39dfb0" opacity=".7"/>
+<path d="M22 83l10 10 24-24" fill="none" stroke="#e6fff7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g font-family="system-ui,Segoe UI,Arial,sans-serif"><text x="178" y="137" fill="#f0f8fc" font-size="72" font-weight="750" letter-spacing="-3">KumaOps</text>
+<text x="181" y="184" fill="#39dfb0" font-size="24" font-weight="600">Review. Apply. Stay in sync.</text>
+<text x="181" y="222" fill="#a7bdcc" font-size="18">Configuration as code for Uptime Kuma</text>
+<g transform="translate(820 60)"><rect width="324" height="180" rx="14" fill="#0b1621" stroke="#25424e"/>
+<text x="24" y="40" fill="#91acbc" font-size="12" letter-spacing="2">FROM YAML TO CONFIDENCE</text>
+<g font-size="18" fill="#e4f1f7"><circle cx="30" cy="72" r="5" fill="#39dfb0"/><text x="48" y="79">Define your checks</text>
+<circle cx="30" cy="112" r="5" fill="#39dfb0"/><text x="48" y="119">Review the plan</text>
+<circle cx="30" cy="152" r="5" fill="#39dfb0"/><text x="48" y="159">Detect configuration drift</text></g></g></g></svg>

@@ -21,6 +21,8 @@ def source_files(root):
         "CHANGELOG.md",
         "CONTRIBUTING.md",
         "SECURITY.md",
+        "SUPPORT.md",
+        "CODE_OF_CONDUCT.md",
         "ROADMAP.md",
     ]
     files = [root / name for name in names]
@@ -28,7 +30,7 @@ def source_files(root):
         files.extend(
             p
             for p in (root / directory).rglob("*")
-            if p.is_file() and p.suffix in {".py", ".md", ".yaml", ".yml", ".cjs"}
+            if p.is_file() and p.suffix in {".py", ".md", ".yaml", ".yml", ".cjs", ".svg"}
         )
     for path in files:
         if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Project header, live CI/release badges and a captured offline first-run preview.
+- Documentation hub, support guide, community guidelines and contribution opportunities.
+- Community routing for questions and private security reports.
+- Include visual/community assets in source distributions and release archives.
+
 ## 0.2.0 — 2026-11-21
 
 - Offline starter-project generation without overwriting files.

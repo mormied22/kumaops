@@ -1,17 +1,41 @@
-# KumaOps
+<p align="center">
+  <img src=".github/assets/header.svg" alt="KumaOps — Review. Apply. Stay in sync." width="1200" />
+</p>
 
-### Monitoring configuration you can review, repeat and check in CI
+<p align="center">
+  <a href="https://github.com/mormied22/kumaops/actions/workflows/ci.yml"><img src="https://github.com/mormied22/kumaops/actions/workflows/ci.yml/badge.svg?branch=main" alt="Build and integration checks" /></a>
+  <a href="https://github.com/mormied22/kumaops/releases/latest"><img src="https://img.shields.io/github/v/release/mormied22/kumaops?color=16a085" alt="Latest release" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/mormied22/kumaops?color=64748b" alt="MIT license" /></a>
+  <a href="pyproject.toml"><img src="https://img.shields.io/badge/Python-3.11%2B-3776ab" alt="Python 3.11 or newer" /></a>
+  <a href="https://github.com/mormied22/kumaops/discussions"><img src="https://img.shields.io/badge/Community-Discussions-16a085" alt="Community discussions" /></a>
+</p>
 
-KumaOps provisions Uptime Kuma v2 from YAML. Define HTTP, TCP and ping checks,
-organize them into groups, assign Discord notifications and schedule weekly
-maintenance. Preview changes before applying and detect drift without writing
-anything to the server.
+<p align="center">
+  <strong>Monitoring configuration you can review, repeat and check in CI.</strong><br />
+  Define checks in YAML. Preview changes. Detect drift. Keep secrets out of reports.
+</p>
 
-**v0.2.0** · Python 3.11+ · MIT
+<p align="center">
+  <a href="#your-first-deployment">Quick start</a> ·
+  <a href="docs/README.md">Documentation</a> ·
+  <a href="https://github.com/mormied22/kumaops/releases/latest">Downloads</a> ·
+  <a href="https://github.com/mormied22/kumaops/discussions">Ask a question</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a>
+</p>
 
-> The live integration target is Kuma **2.5.9** with client **2.9.0**. Discord
-> provider behavior is tested with a local receiver; delivery to an actual Discord
-> channel remains an opt-in verification step. [Test scope](docs/VALIDATION.md)
+---
+
+KumaOps brings configuration as code to **Uptime Kuma v2**: HTTP, TCP and ping checks,
+monitor groups, Discord integrations and recurring maintenance. Use an additive plan
+for deployment and a read-only check to catch drift in automation.
+
+| Review before deploying | Keep repeat runs predictable | Make automation useful |
+| --- | --- | --- |
+| Inspect additions and conflicting fields | Reuse matching resources without duplicates | Redacted JSON and explicit drift exit codes |
+
+> **Verified target:** Kuma 2.5.9 with client 2.9.0. Discord provider behavior is
+> tested with a local receiver; real-channel delivery remains an opt-in check.
+> [Full verification matrix](docs/VALIDATION.md).
 
 ## Why use it?
 
@@ -44,6 +68,8 @@ python -m pip install --no-deps .
 ```
 
 ## Your first deployment
+
+<p><img src=".github/assets/first-run.svg" alt="KumaOps creates a starter configuration and validates it offline" width="1000" /></p>
 
 ```sh
 kumaops --init
@@ -155,3 +181,16 @@ It is unofficial and not affiliated with Uptime Kuma. The internal management AP
 can change; untested upstream versions are not guaranteed compatible.
 
 [MIT License](LICENSE) · [Changelog](CHANGELOG.md)
+
+## Join the project
+
+- **Trying it for the first time?** Follow the quick start and share sanitized setup
+  feedback in [Discussions](https://github.com/mormied22/kumaops/discussions).
+- **Need help?** See [support and troubleshooting](SUPPORT.md).
+- **Found a reproducible bug?** Use the [bug report form](https://github.com/mormied22/kumaops/issues/new?template=bug.yml).
+- **Want to contribute?** Start with [contribution opportunities](docs/CONTRIBUTOR_GUIDE.md)
+  and the [roadmap](ROADMAP.md). Small documentation and test improvements are welcome.
+- **Want to follow development?** Watch releases and star the repository if it is useful to you.
+
+Please read the [community guidelines](CODE_OF_CONDUCT.md). Never share webhook URLs,
+authentication codes, environment files or private infrastructure logs in public.
