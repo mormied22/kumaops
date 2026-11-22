@@ -17,11 +17,14 @@ def source_files(root):
         ".env.example",
         ".env.discord-test.example",
         ".gitignore",
+        ".gitattributes",
         "CHANGELOG.md",
         "CONTRIBUTING.md",
+        "SECURITY.md",
+        "ROADMAP.md",
     ]
     files = [root / name for name in names]
-    for directory in ("src/kumaops", "tests", "examples", "docs", ".github/workflows", "tools"):
+    for directory in ("src/kumaops", "tests", "examples", "docs", ".github", "tools"):
         files.extend(
             p
             for p in (root / directory).rglob("*")

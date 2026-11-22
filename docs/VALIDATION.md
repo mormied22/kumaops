@@ -1,6 +1,6 @@
 # Validation record
 
-Validated on **7 November 2026** using Windows x64, Python **3.12.14**, Node.js
+Validated on **21 November 2026** using Windows x64, Python **3.12.14**, Node.js
 **22.17.0**, Uptime Kuma **2.5.9** and `uptime-kuma-api2` **2.9.0**.
 
 The upstream checkout was pinned to commit
@@ -8,8 +8,8 @@ The upstream checkout was pinned to commit
 
 | Check | Result |
 | --- | --- |
-| Offline pytest suite | **39 passed**; opt-in integration cases skipped in the default run |
-| Opt-in integration suite | **4 passed, 1 skipped**, 283.42 seconds |
+| Offline pytest suite | **60 passed**; opt-in integration cases skipped in the default run |
+| Opt-in integration suite | **4 passed, 1 skipped**, 171.35 seconds |
 | Live HTTP, TCP and ping health; groups and assignments | Passed against the disposable 2.5.9 server |
 | Plan/apply/re-plan, repeat-run no-op, configured drift refusal | Passed |
 | Real 2FA login, missing/invalid/expired/replayed-code rejection | Passed |
@@ -46,6 +46,11 @@ exercised in the separate upstream model process. These results do not claim
 full-server time travel, real Discord delivery, a passing GitHub CI run or
 compatibility with untested Kuma versions/platforms.
 
-The release-candidate publication edition updates documentation, examples and
-package metadata. CLI behavior is unchanged from the functional verification
-above; its offline suite and release packaging are rechecked independently.
+The 0.2.0 release adds setup, JSON/check workflows, apply exclusion,
+trust/timeout controls and validated monitor settings. The offline suite covers
+those features; the live suite exercises the current CLI and new monitor fields.
+Hosted CI has not been run from this local checkout. The real Discord test remains
+skipped because no dedicated webhook was supplied.
+
+The real-server alert fixture explicitly sets maxretries to zero and retryInterval
+to 20 seconds; omitted production settings retain their previous client defaults.

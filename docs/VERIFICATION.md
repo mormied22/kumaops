@@ -24,12 +24,12 @@ release: Kuma's internal management API can change.
   weekly DST offsets, duration timers, nonexistent and repeated local times.
   Database writes and broadcasts are stubbed only in that scheduler process.
 
-## Stable-release criteria
+## Integration qualification and publishing checks
 
-- Run the opt-in real Discord test with a dedicated channel webhook and confirm
+- To qualify actual Discord delivery, run the opt-in test with a dedicated channel webhook and confirm
   both API acceptance and visible DOWN/UP messages. User/role mentions, if used,
   need their own check.
-- Obtain a passing hosted CI matrix and pinned Linux integration run.
+- Before publishing, obtain a passing hosted CI matrix and pinned Linux integration run.
 - Review the source, release archive, license and exact compatibility claims.
   Keep real configuration, secrets and raw infrastructure logs private.
 

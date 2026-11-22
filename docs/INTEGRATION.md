@@ -32,8 +32,8 @@ Then return to the KumaOps root:
 python -m pytest tests/integration -q --live-kuma-source .verification/uptime-kuma --basetemp .verification/pytest --tb=short
 ```
 
-The alert cycle takes several minutes because it honors real monitor intervals
-and the client's default retry. Avoid running within ten minutes of midnight in
+The suite takes several minutes because it honors real monitor intervals and
+waits for unused authenticator codes. The alert fixture explicitly uses zero retries. Avoid running within ten minutes of midnight in
 Europe/London because v0.1 deliberately restricts maintenance to same-day windows.
 The test will refuse that boundary. Use a fresh temporary-directory name if a
 previous run's files are locked by Windows. Stop an interrupted test's exact

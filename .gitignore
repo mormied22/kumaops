@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+!.env.discord-test.example
+.verification/
+.test-tmp*/
+/config.yaml
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+*.log
+
+.kumaops/

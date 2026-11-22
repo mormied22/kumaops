@@ -56,6 +56,16 @@ FAKE_ENV = {"TEST_WEBHOOK": "https://discord.com/api/webhooks/KUMAOPS_TEST/NOT_A
 def test_live_provision_rerun_drift_and_links(live):
     api = live["api"]
     cfg = config(live, "verify-provision")
+    cfg["monitors"]["http"].update(
+        {
+            "maxretries": 0,
+            "retryInterval": 20,
+            "timeout": 10,
+            "method": "GET",
+            "accepted_statuscodes": ["200-299"],
+            "expiryNotification": False,
+        }
+    )
     before = len(api.get_monitors())
     actions = plan(api, cfg, FAKE_ENV)
     assert len(api.get_monitors()) == before
@@ -84,6 +94,7 @@ def test_live_provision_rerun_drift_and_links(live):
 def alert_cycle(live, namespace, webhook_env):
     api, local = live["api"], live["local"]
     cfg = config(live, namespace)
+    cfg["monitors"]["http"].update({"maxretries": 0, "retryInterval": 20, "timeout": 10})
     # Only the HTTP monitor is relevant to this test.
     cfg["monitors"] = {"http": cfg["monitors"]["http"]}
     now = datetime.now(ZoneInfo("Europe/London"))

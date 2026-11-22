@@ -1,0 +1,16 @@
+name: Feature request
+description: Describe a monitoring workflow KumaOps should support.
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow and current limitation
+      description: What are you trying to monitor or automate, and what blocks it?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome and alternatives
+    validations:
+      required: true

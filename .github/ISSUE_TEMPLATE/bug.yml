@@ -1,0 +1,27 @@
+name: Bug report
+description: Report reproducible incorrect behavior.
+body:
+  - type: markdown
+    attributes:
+      value: Remove passwords, webhooks, codes and private infrastructure details before submitting.
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: KumaOps, Kuma, Python and operating system.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and expected behavior
+      description: Include a minimal sanitized configuration and the command used.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include whether any server writes succeeded before the failure.
+    validations:
+      required: true

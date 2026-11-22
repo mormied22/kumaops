@@ -10,6 +10,16 @@ from kumaops.engine import Ref, desired, resolve
 
 
 def test_payloads_accepted_by_pinned_client_builders(cfg, env):
+    cfg["monitors"]["website"].update(
+        {
+            "maxretries": 0,
+            "retryInterval": 20,
+            "timeout": 10,
+            "method": "HEAD",
+            "accepted_statuscodes": ["200-299", "503"],
+            "expiryNotification": True,
+        }
+    )
     client = UptimeKumaApi.__new__(UptimeKumaApi)
     client.info = Mock(return_value={"version": "2.0.0"})
     client.wait_for_event = Mock(side_effect=lambda *args: nullcontext())

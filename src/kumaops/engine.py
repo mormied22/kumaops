@@ -90,7 +90,17 @@ def desired(cfg, env):
             "parent": Ref("monitor", item["group"]) if "group" in item else None,
             "notificationIDList": [Ref("notification", n) for n in item.get("notifications", [])],
         }
-        for field_name in ("url", "hostname", "port"):
+        for field_name in (
+            "url",
+            "hostname",
+            "port",
+            "retryInterval",
+            "maxretries",
+            "timeout",
+            "method",
+            "accepted_statuscodes",
+            "expiryNotification",
+        ):
             if field_name in item:
                 payload[field_name] = item[field_name]
         resources.append((Ref("monitor", key), payload))
@@ -128,7 +138,7 @@ def resolve(value, ids):
     return value
 
 
-def plan(api, cfg, env):
+def plan(api, cfg, env, allow_drift=False):
     resources = desired(cfg, env)
     rows = {
         "monitor": api.get_monitors(),
@@ -161,7 +171,12 @@ def plan(api, cfg, env):
         # applyExisting is a write-time instruction, not a persisted setting.
         fields = set(payload) - {"applyExisting"}
         drift = [k for k in fields if canonical(row.get(k), k) != canonical(payload[k], k)]
-        require(not drift, f"Drift or identity collision: {ref.kind}/{ref.key}; no writes allowed")
+        if drift and allow_drift:
+            actions.append(Action("conflict", ref, {"fields": sorted(drift)}))
+        else:
+            require(
+                not drift, f"Drift or identity collision: {ref.kind}/{ref.key}; no writes allowed"
+            )
     for key, item in cfg["maintenance"].items():
         ref = Ref("maintenance", key)
         expected = [resolve(Ref("monitor", m), ids) for m in item["monitors"]]
@@ -174,6 +189,9 @@ def plan(api, cfg, env):
                 "Invalid maintenance links",
             )
             current = [r["id"] for r in linked]
+        if not set(current) <= set(expected) and allow_drift:
+            actions.append(Action("conflict", ref, {"fields": ["monitors"]}))
+            continue
         require(set(current) <= set(expected), f"Unexpected maintenance links: maintenance/{key}")
         if set(current) != set(expected):
             # Only append missing links, never remove any existing assignment.

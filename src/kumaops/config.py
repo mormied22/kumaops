@@ -44,7 +44,7 @@ def text(value):
 
 
 def http_url(value):
-    if not text(value):
+    if not text(value) or any(c.isspace() for c in value):
         return False
     try:
         parts = urlsplit(value)
@@ -75,8 +75,15 @@ def load_config(path):
     try:
         raw = path.read_text(encoding="utf-8")
         require(len(raw) <= 100_000, "Configuration is too large")
+        require(
+            not any(
+                isinstance(token, (yaml.tokens.AliasToken, yaml.tokens.AnchorToken))
+                for token in yaml.scan(raw)
+            ),
+            "YAML anchors and aliases are not supported",
+        )
         cfg = yaml.load(raw, Loader=UniqueLoader)
-    except (yaml.YAMLError, RecursionError, TypeError) as from_error:
+    except (yaml.YAMLError, UnicodeError, RecursionError, TypeError) as from_error:
         raise ConfigError("Invalid YAML; check syntax and quote dates/times") from from_error
     mapping(cfg, {"version", "namespace", "notifications", "groups", "monitors", "maintenance"})
     require(type(cfg.get("version")) is int and cfg["version"] == 1, "Expected version: 1")
@@ -102,19 +109,88 @@ def load_config(path):
     for item in cfg["groups"].values():
         mapping(item, set())
     for item in cfg["monitors"].values():
-        mapping(item, {"type", "url", "hostname", "port", "interval", "group", "notifications"})
+        mapping(
+            item,
+            {
+                "type",
+                "url",
+                "hostname",
+                "port",
+                "interval",
+                "group",
+                "notifications",
+                "retryInterval",
+                "maxretries",
+                "timeout",
+                "method",
+                "accepted_statuscodes",
+                "expiryNotification",
+            },
+        )
         kind = item.get("type")
-        require(kind in {"http", "ping", "port"}, "Supported monitors: http, ping, port")
+        require(
+            isinstance(kind, str) and kind in {"http", "ping", "port"},
+            "Supported monitors: http, ping, port",
+        )
         require(
             type(item.get("interval", 60)) is int and 20 <= item.get("interval", 60) <= 86400,
             "Invalid interval",
         )
+        for field, lower, upper in (
+            ("retryInterval", 20, 86400),
+            ("maxretries", 0, 100),
+            ("timeout", 1, 3600),
+        ):
+            if field in item:
+                require(
+                    type(item[field]) is int and lower <= item[field] <= upper,
+                    "Invalid monitor timing or retry setting",
+                )
+        require(
+            "timeout" not in item or item["timeout"] <= item.get("interval", 60),
+            "timeout must not exceed interval",
+        )
+        if kind != "http":
+            require(
+                not (
+                    {"method", "accepted_statuscodes", "expiryNotification", "timeout"} & set(item)
+                ),
+                "HTTP options require type: http",
+            )
         if kind == "http":
+            require(
+                isinstance(item.get("method", "GET"), str)
+                and item.get("method", "GET") in {"GET", "HEAD"},
+                "Supported HTTP methods: GET, HEAD",
+            )
+            if "expiryNotification" in item:
+                require(
+                    type(item["expiryNotification"]) is bool, "expiryNotification must be boolean"
+                )
+            if "accepted_statuscodes" in item:
+                codes = item["accepted_statuscodes"]
+                require(
+                    isinstance(codes, list)
+                    and bool(codes)
+                    and all(
+                        isinstance(code, str)
+                        and (
+                            re.fullmatch(r"[1-5]\d{2}", code)
+                            or code in {"100-199", "200-299", "300-399", "400-499", "500-599"}
+                        )
+                        for code in codes
+                    ),
+                    "accepted_statuscodes must contain quoted HTTP codes or ranges",
+                )
             require(http_url(item.get("url")), "HTTP monitor needs a valid URL without credentials")
             require("hostname" not in item and "port" not in item, "Unexpected HTTP fields")
         else:
             require(
-                text(item.get("hostname")) and "url" not in item, "Network monitor needs hostname"
+                text(item.get("hostname"))
+                and not item["hostname"].startswith("-")
+                and re.fullmatch(r"[A-Za-z0-9_.:%-]+", item["hostname"])
+                and "url" not in item,
+                "Network monitor needs hostname",
             )
             if kind == "port":
                 require(
@@ -123,7 +199,11 @@ def load_config(path):
                 )
             else:
                 require("port" not in item, "Ping cannot specify port")
-        require("group" not in item or item["group"] in cfg["groups"], "Unknown group")
+        require(
+            "group" not in item
+            or (isinstance(item["group"], str) and item["group"] in cfg["groups"]),
+            "Unknown group",
+        )
         references(item.get("notifications", []), cfg["notifications"])
     for item in cfg["maintenance"].values():
         mapping(item, {"timezone", "weekdays", "start_date", "start", "end", "active", "monitors"})
